@@ -53,14 +53,9 @@ public class ProductController {
         @PathVariable Long id,
         @RequestBody Product product
     ) {
-        Optional<Product> optionalProduct = service.findById(id);
-
-        if (optionalProduct.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        product.setId(id);
-
-        return ResponseEntity.ok(service.save(product));
+        return service.update(id, product)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")

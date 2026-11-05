@@ -39,6 +39,15 @@ public class ProductServiceImp implements ProductService{
 
     @Transactional
     @Override
+    public Optional<Product> update(Long id, Product product) {
+        return repository.findById(id).map(p -> {
+            product.setId(id);
+            return repository.save(product);
+        });
+    }
+
+    @Transactional
+    @Override
     public Optional<Product> delete(Product product) {
         Optional<Product> productDb = repository.findById(product.getId());
         productDb.ifPresent(repository::delete);
