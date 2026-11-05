@@ -58,9 +58,9 @@ public class ProductController {
         if (optionalProduct.isEmpty())
             return ResponseEntity.notFound().build();
 
-        Product productDb = optionalProduct.orElseThrow();
+        product.setId(id);
 
-        return ResponseEntity.ok(service.save(productDb));
+        return ResponseEntity.ok(service.save(product));
     }
 
     @DeleteMapping("/{id}")
