@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.felipe.curso.springboot.app.springboot_crud.entities.Product;
 import com.felipe.curso.springboot.app.springboot_crud.services.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -43,7 +45,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> create(
-        @RequestBody Product product
+        @Valid @RequestBody Product product
     ){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(product));
     }
@@ -51,7 +53,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<Product> update(
         @PathVariable Long id,
-        @RequestBody Product product
+        @Valid @RequestBody Product product
     ) {
         return service.update(id, product)
             .map(ResponseEntity::ok)
