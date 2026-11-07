@@ -1,5 +1,7 @@
 package com.felipe.curso.springboot.app.springboot_crud.entities;
 
+import com.felipe.curso.springboot.app.springboot_crud.validations.IsRequired;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,7 +30,8 @@ public class Product {
     @Min(value = 500, message = "{Min.product.price}")
     private Integer price;
 
-    @NotBlank(message = "{NotBlank.product.description}")
+    //@NotBlank(message = "{NotBlank.product.description}")
+    @IsRequired
     @Size(min = 3, max = 200, message = "{Size.product.description}")
     private String description;
 
