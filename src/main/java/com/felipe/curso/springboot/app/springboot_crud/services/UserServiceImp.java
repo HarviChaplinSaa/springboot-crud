@@ -1,10 +1,14 @@
 package com.felipe.curso.springboot.app.springboot_crud.services;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.felipe.curso.springboot.app.springboot_crud.entities.Role;
 import com.felipe.curso.springboot.app.springboot_crud.entities.User;
 import com.felipe.curso.springboot.app.springboot_crud.repositories.RoleRepository;
 import com.felipe.curso.springboot.app.springboot_crud.repositories.UserRepository;
@@ -39,6 +43,20 @@ public class UserServiceImp implements UserService {
     @Transactional
     @Override
     public User save(User user) {
+        Optional<Role> optionalRole = roleRepository.findByName("ROLE_USER");
+        
+        Set<Role> roles = new HashSet<>();
+        optionalRole.ifPresent(roles::add);
+        
+        if(user.isAdmin()){
+            optionalRole = roleRepository.findByName("ROLE_ADMIN");
+            optionalRole.ifPresent(roles::add);
+        }
+
+        user.setRoles(roles);
+
+        user.setPassword(encoder.encode(user.getPassword()));
+
         return repository.save(user);
     }
     
