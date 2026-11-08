@@ -14,6 +14,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data 
@@ -26,8 +28,12 @@ public class User {
     private Long id;
 
     @Column(unique = true)
+    @NotBlank
+    @Size(min = 3, max = 12, message = "{NotBlank.user.username}")
     private String username;
      
+    @NotBlank
+    @Size(min = 8, max = 100, message = "{NotBlank.user.username}")
     private String password;
 
     @ManyToMany()
@@ -39,7 +45,7 @@ public class User {
     private Set<Role> roles;
 
     @Transient
-    private Boolean isAdmin;
+    private boolean isAdmin;
 
     public User(){
         this.roles = new HashSet<>();
