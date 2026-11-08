@@ -33,7 +33,7 @@ public class User {
     private String username;
      
     @NotBlank
-    @Size(min = 8, max = 100, message = "{NotBlank.user.username}")
+    @Size(min = 8, max = 100)
     private String password;
 
     @ManyToMany()
@@ -44,8 +44,10 @@ public class User {
     )
     private Set<Role> roles;
 
+    private boolean enable;
+
     @Transient
-    private boolean isAdmin;
+    private boolean admin;
 
     public User(){
         this.roles = new HashSet<>();
