@@ -2,9 +2,7 @@ package com.felipe.curso.springboot.app.springboot_crud.controllers;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

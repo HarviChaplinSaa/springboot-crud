@@ -1,5 +1,6 @@
 package com.felipe.curso.springboot.app.springboot_crud.entities;
 
+import com.felipe.curso.springboot.app.springboot_crud.validations.ExistDb;
 import com.felipe.curso.springboot.app.springboot_crud.validations.IsRequired;
 
 import jakarta.persistence.Entity;
@@ -35,15 +36,19 @@ public class Product {
     @Size(min = 3, max = 200, message = "{Size.product.description}")
     private String description;
 
+    @ExistDb
+    private String sku;
+
     public Product(){
 
     }
 
-    public Product(Long id, String name, Integer price, String description) {
+    public Product(Long id, String name, Integer price, String description, String sku) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.sku = sku;
     }
     
 }

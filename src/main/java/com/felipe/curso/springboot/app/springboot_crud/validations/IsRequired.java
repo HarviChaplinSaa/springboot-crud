@@ -16,7 +16,7 @@ import jakarta.validation.Payload;
 @Constraint(validatedBy = RequiredValidation.class)
 public @interface IsRequired {
 
-    String message() default "{IsRequired.product}";
+    String message() default "{product.isRequired}";
 
 	Class<?>[] groups() default { };
 

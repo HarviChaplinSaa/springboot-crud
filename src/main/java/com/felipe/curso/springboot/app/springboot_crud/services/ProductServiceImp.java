@@ -61,5 +61,11 @@ public class ProductServiceImp implements ProductService{
         productDb.ifPresent(repository::delete);
         return productDb;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public boolean existsBySku(String sku) {
+        return repository.existsBySku(sku);
+    }
     
 }
