@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.felipe.curso.springboot.app.springboot_crud.validations.ExistByUsername;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +36,7 @@ public class User {
     @Column(unique = true)
     @NotBlank
     @Size(min = 3, max = 12, message = "{NotBlank.user.username}")
+    @ExistByUsername 
     private String username;
      
     @NotBlank

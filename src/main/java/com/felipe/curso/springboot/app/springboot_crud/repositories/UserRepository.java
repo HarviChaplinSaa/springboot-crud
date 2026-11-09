@@ -6,5 +6,7 @@ import com.felipe.curso.springboot.app.springboot_crud.entities.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    boolean existsByUsername(String username);
     
 }

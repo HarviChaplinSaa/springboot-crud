@@ -12,7 +12,7 @@ import jakarta.validation.Payload;
 @Target ({
     ElementType.FIELD
 })
-@Constraint (validatedBy = ExistValidation.class)
+@Constraint (validatedBy = ExistDbValidation.class)
 public @interface ExistDb {
 
     String message() default "{ExistDb.product}";
