@@ -51,5 +51,14 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(
+        @Valid @RequestBody User user,
+        BindingResult result
+    ){
+        user.setAdmin(false);
+        return create(user, result);
+    }
     
 }
