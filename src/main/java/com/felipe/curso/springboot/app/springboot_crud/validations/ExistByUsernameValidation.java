@@ -2,7 +2,7 @@ package com.felipe.curso.springboot.app.springboot_crud.validations;
 
 import org.springframework.stereotype.Component;
 
-import com.felipe.curso.springboot.app.springboot_crud.repositories.UserRepository;
+import com.felipe.curso.springboot.app.springboot_crud.services.UserService;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -10,15 +10,18 @@ import jakarta.validation.ConstraintValidatorContext;
 @Component
 public class ExistByUsernameValidation implements ConstraintValidator<ExistByUsername, String> {
 
-    private UserRepository repository;
+    private UserService service;
 
-    public ExistByUsernameValidation(UserRepository repository) {
-        this.repository = repository;
+    public ExistByUsernameValidation(UserService service) {
+        this.service = service;
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return !repository.existsByUsername(value);
+        if (value == null || value.isBlank()) {
+            return true;
+        }
+        return !service.existsByUsername(value);
     }
 
 }
